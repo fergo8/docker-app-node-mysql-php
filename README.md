@@ -6,4 +6,4 @@ As explicações do passo a passo deste tutorial estão disponíveis no diretór
 
 ## Índice
 
-01. Criando e Executando a Imagem MySQL
+[01. Criando e Executando a Imagem MySQL](https://github.com/fergo8/docker-app-node-mysql-php/blob/master/notas/01-criando-e-executando-a-imagem-mysql.md)
