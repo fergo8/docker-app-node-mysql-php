@@ -32,6 +32,28 @@ Feito isso, a imagem será montada e ficará disponível para uso na lista de im
 docker image ls
 ```
 
-Feito isso, o próximo passo é colocar essa imagem para rodar.
+E agora o próximo passo é colocar essa imagem para rodar.
 
 ## Passo 3 - Executar a imagem do MySQL
+
+Para executar a imagem do MySQL que criamos, basta utilizarmos o comando **_docker run_** seguido de algumas flags. Observe:
+
+```bash
+docker run -d --rm --name mysql-container mysql-image
+```
+
+Atribuimos três flags no comando acima, sendo elas as seguintes:
+
+- -d (detach): flag opcional, mantém o terminal livre enquanto o comando é processado;
+- --rm (remove): flag opcional, caso já exista um container de mesmo nome, remove o container antigo;
+- --name: atribui um nome ao container que está sendo criado (no caso, o nome que criei é mysql-container).
+
+Além das três flags, também foi atribuído ao comando docker run o nome da imagem docker que haviamos criado no passo anterior deste tutorial, cujo nome é _mysql-image_. Para saber se deu tudo certo e o container está executando, basta usar o comando a seguir:
+
+```bash
+docker ps
+```
+
+Este comando listará todos os containers que estiverem "em pé", ou seja, rodando. Note que a lista exibe um id do container, o nome da imagem usada, quando ele foi criado, o status dele, a porta em que está rodando e o nome que escolhemos para ele. Essas informações serão importantes para acessá-lo.
+
+[Próxima Página >>](https://github.com/fergo8/docker-app-node-mysql-php/blob/master/notas/02-construindo-o-banco-de-dados.md)
