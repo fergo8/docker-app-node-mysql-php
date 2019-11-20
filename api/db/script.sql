@@ -10,9 +10,9 @@ CREATE TABLE IF NOT EXISTS pokemons (
     PRIMARY KEY (id)
 );
 
-INSERT INTO pokemons (0, 'Pikachu', 2000);
-INSERT INTO pokemons (0, 'Psyduck', 1800);
-INSERT INTO pokemons (0, 'Eevee', 1700);
-INSERT INTO pokemons (0, 'Squirtle', 2000);
-INSERT INTO pokemons (0, 'Bulbasauro', 2000);
-INSERT INTO pokemons (0, 'Charmander', 2000);
+INSERT INTO pokemons VALUE(0, 'Pikachu', 2000);
+INSERT INTO pokemons VALUE(0, 'Psyduck', 1800);
+INSERT INTO pokemons VALUE(0, 'Eevee', 1700);
+INSERT INTO pokemons VALUE(0, 'Squirtle', 2000);
+INSERT INTO pokemons VALUE(0, 'Bulbasauro', 2000);
+INSERT INTO pokemons VALUE(0, 'Charmander', 2000);
