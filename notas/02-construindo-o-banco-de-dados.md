@@ -42,15 +42,16 @@ docker exec -i mysql-container mysql -uroot -p app123 < api/db/script.sql
 
 O comando **_docker exec_** permite que nós rodemos comandos dentro dos containers. A sintaxe do **_docker exec_** aceita a flag **-i**, que garante interação com o prompt do container, ou seja, sem ela nós não conseguiríamos executar comandos dentro do nosso container. Em seguida temos o nome do container que vamos utilizar, no caso **_mysql-container_**.
 
-O restante do comando refere-se ao comando que usaremos dentro do prompt do container, que no nosso caso é **_mysql -uroot -p app123 < api/db/script.sql_**. Explicando melhor o que tudo isso significa (para quem conhece poico de MySQL):
+O restante do comando refere-se ao comando que usaremos dentro do prompt do container, que no nosso caso é **_mysql -uroot -papp123 < api/db/script.sql_**. Explicando melhor o que tudo isso significa (para quem conhece poico de MySQL):
 
 - mysql: parte do comando que invoca o MySQL dentro do container;
-- -uroot: indica que o MySQL será acessado como usuário root;
+- -u (user): é a flag para qual usuário iremos utilizar;
+- root: indica que o MySQL será acessado como usuário root;
 - -p (password): indica a senha do usuário root;
 - app123: é a senha que configuramos no Dockerfile da imagem do MySQL, lembra?;
 - < api/db/script.sql: é o caminho onde se encontra o script em SQL que iremos rodar no container.
 
-Entendendo isso, ficará fácil de descobrir como usar outros comandos dentro dos containers que você criar. Em outras palavras, basta usar:
+Note que as flags **_-u_** e **_-p_** devem receber seus valores ("root" e "app123") sem nenhum espaço separando-os, senão o comando não funcionará. Entendendo isso, ficará fácil de descobrir como usar outros comandos dentro dos containers que você criar. Em outras palavras, basta usar:
 
 ```dockerfile
 docker exec -i [nome do container] [comando a ser rodado dentro do container]
@@ -59,3 +60,34 @@ docker exec -i [nome do container] [comando a ser rodado dentro do container]
 Feito isso, se tudo ocorreu corretamente, haverá um banco de dados no container chamado **_appnodemysqlphp_**, com uma tabela **_pokemons_**, com seis "bonecos pokemon" inseridos nela.
 
 ## Passo 6 - Conferir se o script rodou
+
+Para conferir se o script funcionou e se nosso banco de dados está criado, precisamos utilizar o comando **_docker exec_** outra vez, mas agora usando outra flag. Observe:
+
+```dockerfile
+docker exec -it mysql-container /bin/bash
+```
+
+Essa nova flag **_-it_** significa _interactive tty_, ou seja, ela nos dará acesso a um terminal interativo para que nós utilizemos o MySQL existente dentro do container especificado (_mysql-container_). A seguir, temos o nome do container a ser acessado, e por fim temos o **_/bin/bash_**, que indica o tipo de terminal a ser usado (terminal Bash).
+
+Ao pressionar _Enter_ um terminal será aberto, isso significa que estamos dentro do container. Agora precisamos acessar o MySQL propriamente dito. Para tanto, faça:
+
+```bash
+mysql -uroot -papp123
+```
+
+Note que o cursor mudou para **_mysql>_**, ou seja, o prompt do MySQL. Aqui você pode usar comandos SQL para confirmar se o banco de dados está criado corretamente, tais como:
+
+```sql
+-- Lista os bancos de dados existentes no MySQL do container
+SHOW DATABASES;
+
+-- Seleciona o banco criado pelo nosso script
+USE appnodemysqlphp;
+
+-- Seleciona todos os dados constantes na tabela "pokemons"
+SELECT * FROM pokemons;
+```
+
+Se estiver tudo certo até aqui, o prompt do MySQL apresentará a tabela com todos os nomes dos pokémons que inserimos. Contudo, existe um problema aqui. **Caso você derrube o container ou desligue seu pc, todos os dados inseridos no MySQL serão perdidos**. Para evitar que isso ocorra, precisamos utilizar um recurso do Docker muito importante chamado **volumes**, que serão abordados na próxima página deste tutorial.
+
+[Próxima Página >>](https://github.com/fergo8/docker-app-node-mysql-php/blob/master/notas/03-persistindo-os-dados-no-container.md)
