@@ -37,7 +37,7 @@ Feito isso, agora precisamos executar dentro do container este script recém cri
 Para efetuar a execução do script SQL dentro do container, basta utilizar o seguinte comando Docker:
 
 ```dockerfile
-docker exec -i mysql-container mysql -uroot -p app123 < api/db/script.sql
+docker exec -i mysql-container mysql -uroot -papp123 < api/db/script.sql
 ```
 
 O comando **_docker exec_** permite que nós rodemos comandos dentro dos containers. A sintaxe do **_docker exec_** aceita a flag **-i**, que garante interação com o prompt do container, ou seja, sem ela nós não conseguiríamos executar comandos dentro do nosso container. Em seguida temos o nome do container que vamos utilizar, no caso **_mysql-container_**.
