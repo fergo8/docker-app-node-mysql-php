@@ -39,3 +39,23 @@ Para efetuar a execução do script SQL dentro do container, basta utilizar o se
 ```dockerfile
 docker exec -i mysql-container mysql -uroot -p app123 < api/db/script.sql
 ```
+
+O comando **_docker exec_** permite que nós rodemos comandos dentro dos containers. A sintaxe do **_docker exec_** aceita a flag **-i**, que garante interação com o prompt do container, ou seja, sem ela nós não conseguiríamos executar comandos dentro do nosso container. Em seguida temos o nome do container que vamos utilizar, no caso **_mysql-container_**.
+
+O restante do comando refere-se ao comando que usaremos dentro do prompt do container, que no nosso caso é **_mysql -uroot -p app123 < api/db/script.sql_**. Explicando melhor o que tudo isso significa (para quem conhece poico de MySQL):
+
+- mysql: parte do comando que invoca o MySQL dentro do container;
+- -uroot: indica que o MySQL será acessado como usuário root;
+- -p (password): indica a senha do usuário root;
+- app123: é a senha que configuramos no Dockerfile da imagem do MySQL, lembra?;
+- < api/db/script.sql: é o caminho onde se encontra o script em SQL que iremos rodar no container.
+
+Entendendo isso, ficará fácil de descobrir como usar outros comandos dentro dos containers que você criar. Em outras palavras, basta usar:
+
+```dockerfile
+docker exec -i [nome do container] [comando a ser rodado dentro do container]
+```
+
+Feito isso, se tudo ocorreu corretamente, haverá um banco de dados no container chamado **_appnodemysqlphp_**, com uma tabela **_pokemons_**, com seis "bonecos pokemon" inseridos nela.
+
+## Passo 6 - Conferir se o script rodou
