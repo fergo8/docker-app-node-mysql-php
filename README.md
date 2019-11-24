@@ -7,8 +7,13 @@ As explicações do passo a passo deste tutorial estão disponíveis no diretór
 ## Índice
 
 - MySQL
+
 [01. Criando e Executando a Imagem MySQL](https://github.com/fergo8/docker-app-node-mysql-php/blob/master/notas/01-criando-e-executando-a-imagem-mysql.md)
+
 [02. Construindo o Banco de Dados](https://github.com/fergo8/docker-app-node-mysql-php/blob/master/notas/02-construindo-o-banco-de-dados.md)
+
 [03. Persistindo os Dados no Container](https://github.com/fergo8/docker-app-node-mysql-php/blob/master/notas/03-persistindo-os-dados-no-container.md)
+
 - API Node
+
 [04. Criando a API Node](https://github.com/fergo8/docker-app-node-mysql-php/blob/master/notas/04-criando-a-api-node.md)
