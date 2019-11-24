@@ -4,7 +4,7 @@
   "description": "API Node para conexao com banco de dados MySQL",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "start": "nodemon ./src/index"
   },
   "keywords": [
     "Docker"
