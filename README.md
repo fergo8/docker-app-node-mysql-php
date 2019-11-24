@@ -1,6 +1,6 @@
 # Repositório de estudos Docker
 
-Este repositório serve como tutorial para explicar alguns dos principais comandos de Docker. Para tanto, este estudo se baseia em um projeto simples que envolve um banco de dados MySQL, uma API Node que consulta o banco de dados, e uma aplicação em PHP que consome a API para apresentar o conteúdo em tela.
+Este repositório serve como tutorial para explicar alguns dos principais comandos de Docker. Para tanto, este estudo se baseia em um projeto simples que envolve um banco de dados MySQL, uma API Node que consulta o banco de dados, e uma aplicação em PHP que consome a API para apresentar o conteúdo em tela. O tutorial foi escrito com base [nessa videoaula do canal Programador a Bordo](https://www.youtube.com/watch?v=Kzcz-EVKBEQ&t=3s).
 
 As explicações do passo a passo deste tutorial estão disponíveis no diretório [Notas](https://github.com/fergo8/docker-app-node-mysql-php/tree/master/notas), que pode ser acompanhado no índice abaixo.
 
