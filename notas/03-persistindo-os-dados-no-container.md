@@ -22,8 +22,14 @@ docker run -d -v $(pwd)/api/db/data:/var/lib/mysql --rm --name mysql-container m
 
 Esta nova flag **-v** significa **volume** e recebe o caminho, como dito anteriormente. Note que o caminho possui duas partes: a primeira (antes do sinal de dois pontos) é o caminho onde os dados serão armazenados no pc host, enquanto que o segundo (depois do sinal de dois pontos) refere-se ao caminho do MySQL dentro do container.
 
+## Passo 9 - Executar o script SQL novamente
+
 Agora que nosso **_mysql-container_** está em pé e apontando para um volume, precisamos rodar outra vez o comando para executar o **_script.sql_** dentro do container:
 
 ```dockerfile
 docker exec -i mysql-container mysql -uroot -papp123 < api/db/script.sql
 ```
+
+Pronto! O banco de dados da aplicação está completo. Nas próximas partes, criaremos uma API em Node.js que acessará os dados do banco e depois o front-end em PHP para apresentá-los na tela.
+
+[Próxima Página >>](https://github.com/fergo8/docker-app-node-mysql-php/blob/master/notas/04-criando-a-api-node.md)
