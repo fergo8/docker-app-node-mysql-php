@@ -7,11 +7,11 @@ A pasta **_app-node-mysql-php_** é nosso diretório raíz. Dentro dela criamos 
 Dentro de **_db_** criamos o arquivo **_Dockerfile_**, responsável por configurar a imagem do MySQL. A princípio, este Dockerfile possuirá apenas a definição da imagem MySQL (linha 1) e uma variável de ambiente que armazena a senha do banco (linha 2):
 
 ```dockerfile
-FROM mysql
+FROM mysql:5.7
 ENV MYSQL_ROOT_PASSWORD app123
 ```
 
-O comando **_from_** define a imagem e **_env_** declara variáveis de ambiente, no caso a senha root do banco que será "app123". Para conhecer quais variáveis de ambiente uma imagem Docker aceita é só procurar essa informação no [DockerHub da imagem em questão](https://hub.docker.com/_/mysql).
+O comando **_from_** define a imagem seguida da versão (no caso, a versão 5.7) e **_env_** declara variáveis de ambiente, no caso a senha root do banco que será "app123". Para conhecer quais variáveis de ambiente uma imagem Docker aceita é só procurar essa informação no [DockerHub da imagem em questão](https://hub.docker.com/_/mysql).
 
 ## Passo 2 - Construir a imagem do MySQL
 
