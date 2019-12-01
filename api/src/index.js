@@ -23,7 +23,7 @@ connection.connect()
 // Criando uma rota para /pokemons
 app.get("/pokemons", (req, res) => {
 
-    // Criando uma query que seleciona totos os itens da tabela "pokemons"
+    // Criando uma query que seleciona todos os itens da tabela "pokemons"
     connection.query("SELECT * FROM pokemons", (err, result) => {
 
         // Verificando se há erro no retorno da query
