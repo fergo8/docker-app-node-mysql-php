@@ -19,3 +19,5 @@ As explicações do passo a passo deste tutorial estão disponíveis no diretór
 [04. Criando a API Node](https://github.com/fergo8/docker-app-node-mysql-php/blob/master/notas/04-criando-a-api-node.md)
 
 [05. Escrevendo a API Node](https://github.com/fergo8/docker-app-node-mysql-php/blob/master/notas/05-escrevendo-a-api-node.md)
+
+[06. Criando Imagem e Container da API](https://github.com/fergo8/docker-app-node-mysql-php/blob/master/notas/06-criando-imagem-e-container-da-api.md)
