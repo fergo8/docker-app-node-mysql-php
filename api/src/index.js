@@ -11,7 +11,7 @@ const app = express()
 
 // Gerando conexão com banco de dados
 const connection = mysql.createConnection({
-    host: "172.17.0.2",
+    host: "mysql-container",
     user: "root",
     password: "app123",
     database: "appnodemysqlphp"
