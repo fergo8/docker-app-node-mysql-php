@@ -34,4 +34,38 @@ O **_docker run_** já foi explicado anteriormente no [passo 1](https://github.c
 
 Como definimos a porta 9001, se estiver tudo certo e você tiver os dois containers em pé (no caso, **_node-container_** e **_mysql-container_**), então basta acessar em algum navegador o link **_localhost:9001/pokemons_** para ver como resultado o JSON com os dados que haviamos inserido no banco de dados.
 
+## Passo Bônus - Fazer um link entre containers
+
+Aqui vai uma dica bastante interessante para usar na hora de subir um container que se relacione com outro, como é o caso dos nossos dois containers. Se voltarmos ao **Passo 14** deste tutorial, no momento em que escrevemos o arquivo **_index.js_** da API Node, note que tivemos de passar o IP Address do **_mysql-container_** como parâmetro para o método **_createConnection()_**, lembra? Esse era o método:
+
+```javascript
+// Gerando conexão com banco de dados
+const connection = mysql.createConnection({
+    host: "172.17.0.2",
+    user: "root",
+    password: "app123",
+    database: "appnodemysqlphp"
+})
+```
+
+Existe uma maneira de determinarmos o próprio nome do container em vez de seu IP Address. Isso facilita muito nossa vida! Para realizarmos essa tarefa, na hora de subir o container da API Node basta adicionarmos a flag **_--link_** seguida do nome do container ao qual a API se relaciona. Observe:
+
+```dockerfile
+docker run -d -v $(pwd)/api:/home/node/app -p 9001:9001 --link mysql-container --rm --name node-container node-image
+```
+
+Ao subir o container da API Node dessa forma, o método de conexão da API pode ser alterado para receber o nome do container em vez do IP Address. Veja:
+
+```javascript
+// Gerando conexão com banco de dados
+const connection = mysql.createConnection({
+    host: "mysql-container",
+    user: "root",
+    password: "app123",
+    database: "appnodemysqlphp"
+})
+```
+
+Isso facilita o desenvolvimento uma vez que não precisaremos mais pesquisar IP dos containers dentro de uma rede Docker. Outro benefício é o fato de não haver problemas caso um container mude de IP por algum motivo.
+
 [Próxima Página >>](https://github.com/fergo8/docker-app-node-mysql-php/blob/master/notas/07-criando-front-end-em-php.md)
