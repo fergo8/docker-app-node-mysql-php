@@ -58,3 +58,30 @@ Como este tutorial não tem o objetivo de ensinar HTML nem PHP, não acho válid
 Em todo caso, a linha que nos interessa é a que contém a função **_file_get_contents()_**. Ela é responsável por acessar o conteúdo JSON de nossa API Node e apresentá-lo dentro da tabela. Feito isso, vamos escrever um novo **_Dockerfile_** para gerar a imagem PHP.
 
 ## Passo 18 - Gerar imagem PHP
+
+Para gerar a imagem PHP do nosso front-end precisamos primeiro criar o novo _Dockerfile_ dentro da pasta _website_. Neste arquivo teremos a indicação da imagem oficial do **_PHP 7.2 com Apache_**, juntamente com o caminho de diretórios onde o projeto ficará armazenado dentro do futuro container que subiremos. Observe:
+
+```dockerfile
+FROM php:7.2-apache
+WORKDIR /var/www/html
+```
+
+Uma vez que tenhamos preparado o _Dockerfile_, agora vamos no terminal executar aquele mesmo comando de sempre para gerarmos a imagem:
+
+```dockerfile
+docker build -t php-image -f website/Dockerfile .
+```
+
+**Obs: importante nunca esquecer o ponto no final do comando, pois ele indica o contexto da montagem da imagem.**
+
+## Passo 19 - Gerar container PHP
+
+Tendo pronta a imagem do PHP, vamos finalizar este tutorial subindo o container. Basicamente é o mesmo comando **_docker run_** de sempre, não há nada de novo a não ser trocarmos o caminho de diretórios do volume e o número das portas. Observe:
+
+```dockerfile
+docker run -d -v $(pwd)/website:/var/www/html -p 8888:80 --link node-container --name php-container php-image
+```
+
+Repare que estamos fazendo um redirecionamento da porta 80 do container para a porta 8888 do pc host.
+
+E com isso terminamos este tutorial. Espero que tenha sido uma leitura proveitosa. Agradecimentos ao Ayrton do canal [Programador a Bordo](https://www.youtube.com/watch?v=Kzcz-EVKBEQ&t=3s) por ter compartilhado esse conhecimento, viabilizando a escrita deste tutorial. Até a próxima!
