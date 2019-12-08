@@ -1,0 +1,31 @@
+version: "3.7"
+services:
+    database:
+        image: mysql
+        command: --default-authentication-plugin=mysql_native_password
+        container_name: mysql-container
+        environment:
+            MYSQL_ROOT_PASSWORD: app123
+        volumes:
+            - ./api/db/data:/var/lib/mysql
+        restart: always
+    api:
+        build: "./api"
+        container_name: node-container
+        volumes:
+            - ./api:/home/node/app
+        restart: always
+        ports:
+            - "9001:9001"
+        depends_on:
+            - database
+    website:
+        image: "php:7.2-apache"
+        container_name: php-container
+        volumes:
+            - ./website:/var/www/html
+        restart: always
+        ports:
+            - "8888:80"
+        depends_on:
+            - api
