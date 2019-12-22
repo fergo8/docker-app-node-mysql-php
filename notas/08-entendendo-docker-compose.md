@@ -32,7 +32,19 @@ services:
         restart: always
 ```
 
-Calma, parece difícil de entender a princípio, mas já já você perceberá que conhece quase tudo o que está aí.
+Calma, parece difícil de entender, mas já já você perceberá que conhece quase tudo o que está aí. Temos as seguintes tags:
+
+- image: nome da imagem do MySQL (o mesmo que havia no dockerfile do banco);
+- container_name: nome do container a ser subido;
+- environment: são as variáveis de ambiente que havíamos definido no dockerfile;
+- volumes: o mesmo valor que usávamos na opção **-v** ao criarmos o container.
+
+Estas são as tags com valores que já foram abordadas anteriormente. Além delas, temos duas novas:
+
+- restart: reinicia o container sempre que houver crash;
+- command: no caso deste serviço do MySQL, é recomendado na documentação que haja essa tag.
+
+Agora, no mesmo arquivo **_docker-compose.yml_** vamos criar o segundo serviço referente à API Node.
 
 ### Serviço da API Node
 
