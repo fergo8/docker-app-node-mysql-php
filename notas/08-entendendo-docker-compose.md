@@ -16,7 +16,7 @@ Antes de definirmos os três serviços, precisamos informar a **versão**, que n
 
 ### Serviço do MySQL
 
-Nessa etapa vou criar primeiro o serviço referente ao banco de dados, atribuindo-lhe o nome de **_database_**. Observe como o código do arquivo **_docker-compose.yml_** está até o momento:
+Nessa etapa vou criar primeiro o serviço referente ao banco de dados, atribuindo-lhe o nome de **_database_**. Existem duas maneiras de fazer isso: ou usando aquele dockerfile do MySQL que havíamos escrito, ou adicionando as configurações necessárias direto no arquivo do **Docker Compose**. No caso desse serviço MySQL vamos optar pela segunda alternativa. Observe como o código do arquivo **_docker-compose.yml_** está até o momento:
 
 ```dockerfile
 version: "3.7"
@@ -34,20 +34,60 @@ services:
 
 Calma, parece difícil de entender, mas já já você perceberá que conhece quase tudo o que está aí. Temos as seguintes tags:
 
-- image: nome da imagem do MySQL (o mesmo que havia no dockerfile do banco);
-- container_name: nome do container a ser subido;
-- environment: são as variáveis de ambiente que havíamos definido no dockerfile;
-- volumes: o mesmo valor que usávamos na opção **-v** ao criarmos o container.
+- **image**: nome da imagem do MySQL (o mesmo que havia no dockerfile do banco);
+- **container_name**: nome do container a ser subido;
+- **environment**: são as variáveis de ambiente que havíamos definido no dockerfile;
+- **volumes**: o mesmo valor que usávamos na opção **-v** ao criarmos o container.
 
 Estas são as tags com valores que já foram abordadas anteriormente. Além delas, temos duas novas:
 
-- restart: reinicia o container sempre que houver crash;
-- command: no caso deste serviço do MySQL, é recomendado na documentação que haja essa tag.
+- **restart**: reinicia o container sempre que houver crash;
+- **command**: no caso deste serviço do MySQL, é recomendado na documentação que haja essa tag.
 
 Agora, no mesmo arquivo **_docker-compose.yml_** vamos criar o segundo serviço referente à API Node.
 
 ### Serviço da API Node
 
+Para gerar o container da API Node via **_Docker Compose_** precisamos criar o segundo serviço. Estou chamando-o de **_api_**. Aqui nós vamos fazer diferente: usaremos o _dockerfile_ já existente para desenvolver o serviço. Observe:
+
+```dockerfile
+api:
+    build: "./api"
+    container_name: node-container
+    volumes:
+        - ./api:/home/node/app
+    restart: always
+    ports:
+        - "9001:9001"
+    depends_on:
+        - database
+```
+
+Nesse arquivo temos como novidade as tags a seguir:
+
+- **build**: define o local onde se encontra o _dockerfile_ a ser usado;
+- **ports**: indica a porta do host e do container, equivalente à opção **-p**;
+- **depends_on**: refere-se às dependências, ou seja, o serviço **api** dependerá do serviço **database**.
+
+Feito isso, a próxima etapa do arquivo **Docker Compose** será criarmos o terceiro serviço, cujo intuito será gerar o container do **_front-end em PHP_**.
+
 ### Serviço do front-end em PHP
+
+O serviço da aplicação front-end em PHP não possui nenhuma novidade. Para gerá-la, vamos descartar o _dockerfile_ escrito e vamos incluir todas as configurações direto no arquivo **_docker-compose.yml_**:
+
+```dockerfile
+website:
+    image: "php:7.2-apache"
+    container_name: php-container
+    volumes:
+        - ./website:/var/www/html
+    restart: always
+    ports:
+        - "8888:80"
+    depends_on:
+        - api
+```
+
+Pronto! Agora é só rodar o Compose para subirmos os três containers automaticamente!
 
 ## Passo 3 - Subir todos os serviços com Docker Compose Up
