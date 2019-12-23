@@ -26,6 +26,6 @@ As explicações do passo a passo deste tutorial estão disponíveis no diretór
 
 [07. Criando Front-end em PHP](https://github.com/fergo8/docker-app-node-mysql-php/blob/master/notas/07-criando-front-end-em-php.md)
 
-- Docker Compose (Bônus)
+- Bônus: Assuntos Relacionados
 
 [08. Entendendo Docker Compose](https://github.com/fergo8/docker-app-node-mysql-php/blob/master/notas/08-entendendo-docker-compose.md)
