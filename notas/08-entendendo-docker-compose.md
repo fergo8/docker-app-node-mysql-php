@@ -91,3 +91,29 @@ website:
 Pronto! Agora é só rodar o Compose para subirmos os três containers automaticamente!
 
 ## Passo 3 - Subir todos os serviços com Docker Compose Up
+
+Agora que já temos o **_docker-compose.yml_** devidamente criado, poderemos subir todos os três containers da aplicação de uma só vez através do comando a seguir:
+
+```bash
+docker-compose up
+```
+
+Caso esteja faltando alguma imagem no pc, essa imagem será baixada. Além disso, é possível também acrescentarmos no comando acima a opção **-d**, para impedir que o terminal fique travado enquanto os containers são executados.
+
+## Passo 4 - Alimentar o banco de dados
+
+Use o mesmo comando já indicado para alimentar o banco de dados com as informações do script SQL:
+
+```dockerfile
+docker exec -i mysql-container mysql -uroot -papp123 < api/db/script.sql
+```
+
+## Passo 5 - Parar os containers
+
+Quando quiser parar a execução dos containers, use o comando com **stop**:
+
+```bash
+docker-compose stop
+```
+
+Assim, tudo será encerrado e na lista de containers (_docker ps_) não haverá mais os três containers da nossa aplicação.
